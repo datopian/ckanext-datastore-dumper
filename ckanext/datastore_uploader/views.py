@@ -42,7 +42,10 @@ class DatastoreModifiedController(MethodView):
         )
         resource = get_action("resource_show")(context, {"id": resource_id})
 
-        if task_status.get("state", False) == "completed":
+        if (
+            task_status.get("state", False) == "completed"
+            and resource.get("url_type") == "datastore"
+        ):
             ## check if s3filestore is in plugin list
             if "s3filestore" in config.get("ckan.plugins"):
                 try:
@@ -60,17 +63,19 @@ class DatastoreModifiedController(MethodView):
                         Params={"Bucket": bucket.name, "Key": key_path},
                         ExpiresIn=60,
                     )
-                    redirect_to(url)
+                    return redirect_to(url)
                 except Exception as e:
                     pass
             else:
+                filename = resource_id + ".csv"
                 upload = uploader.get_resource_uploader(resource)
                 filepath = upload.get_path(resource_id)
-                resp = flask.send_file(filepath, as_attachment=True)
+                resp = flask.send_file(
+                    filepath, attachment_filename=filename, as_attachment=True
+                )
                 if resource.get("mimetype"):
                     resp.headers["Content-Type"] = resource["mimetype"]
                 return resp
-
         try:
             offset = int_validator(request.args.get("offset", 0), {})
         except Invalid as e:
