@@ -3,10 +3,12 @@ from flask import Blueprint, make_response
 from ckanext.datastore.controller import dump_to
 from flask.views import MethodView
 import ckan.lib.uploader as uploader
-
+import ckan.model as model
 from ckan.plugins.toolkit import (
+    c,
     Invalid,
     ObjectNotFound,
+    NotAuthorized,
     get_validator,
     _,
     request,
@@ -30,7 +32,13 @@ log = __import__("logging").getLogger(__name__)
 class DatastoreModifiedController(MethodView):
     def get(self, resource_id):
         # Check if datastore_upload ask is completed
-        context = {"ignore_auth": True}
+        context = {
+            "model": model,
+            "session": model.Session,
+            "user": c.user,
+            "auth_user_obj": c.userobj,
+        }
+
         task_status = get_action("task_status_show")(
             context,
             {
@@ -40,7 +48,10 @@ class DatastoreModifiedController(MethodView):
                 "key": "datastore_upload",
             },
         )
-        resource = get_action("resource_show")(context, {"id": resource_id})
+        try:
+            resource = get_action("resource_show")(context, {"id": resource_id})
+        except NotAuthorized:
+            abort(404, _("Not authorized to read resource %s") % resource_id)
 
         if (
             task_status.get("state", False) == "completed"
