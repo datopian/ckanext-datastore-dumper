@@ -30,6 +30,7 @@ def datastore_upload(context, data_dict):
         resource_dict = tk.get_action("resource_show")(
             context, {"id": data_dict["resource_id"]}
         )
+        user_dict = tk.get_action("user_show")(context, {"id": context["user"]})
 
         if resource_dict["url_type"] == "datastore":
             plugins.toolkit.get_action("task_status_update")(
@@ -45,7 +46,7 @@ def datastore_upload(context, data_dict):
                     "state": "pending",
                 },
             )
-            enqueue_datastore_upload(resource_dict, "datastore_upload")
+            enqueue_datastore_upload(resource_dict, user_dict)
     except Exception as e:
         log.info("Failed to enqueue datastore upload job: {}".format(e))
         pass
