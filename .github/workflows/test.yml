@@ -44,5 +44,5 @@ jobs:
 
         ckan -c test.ini db init
     - name: Run tests
-      run: pytest --ckan-ini=test.ini --cov=ckanext.datastore_uploader --disable-warnings ckanext/datastore_uploader
+      run: pytest --ckan-ini=test.ini --cov=ckanext.datastore_dumper --disable-warnings ckanext/datastore_dumper
 

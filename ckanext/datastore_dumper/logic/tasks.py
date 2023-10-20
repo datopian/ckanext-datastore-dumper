@@ -1,4 +1,8 @@
-import urlparse
+try:
+    import urlparse
+except ImportError:
+    import urllib.parse as urlparse
+    
 import requests
 from io import BytesIO
 from werkzeug.datastructures import FileStorage

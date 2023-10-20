@@ -1,0 +1,14 @@
+# datastore_dumper-js:
+#   filter: rjsmin
+#   output: ckanext-datastore_dumper/%(version)s-datastore_dumper.js
+#   contents:
+#     - js/datastore_dumper.js
+#   extra:
+#     preload:
+#       - base/main
+
+# datastore_dumper-css:
+#   filter: cssrewrite
+#   output: ckanext-datastore_dumper/%(version)s-datastore_dumper.css
+#   contents:
+#     - css/datastore_dumper.css

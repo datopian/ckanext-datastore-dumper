@@ -1,5 +1,5 @@
 include README.rst
 include LICENSE
 include requirements.txt
-recursive-include ckanext/datastore_uploader *.html *.json *.js *.less *.css *.mo *.yml
-recursive-include ckanext/datastore_uploader/migration *.ini *.py *.mako
+recursive-include ckanext/datastore_dumper *.html *.json *.js *.less *.css *.mo *.yml
+recursive-include ckanext/datastore_dumper/migration *.ini *.py *.mako

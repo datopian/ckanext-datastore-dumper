@@ -1,6 +1,3 @@
-[![Tests](https://github.com/sagargg/ckanext-datastore-uploader/workflows/Tests/badge.svg?branch=main)](https://github.com/sagargg/ckanext-datastore-uploader/actions)
- 
-
 When there is a high volume of requests on the datastore dump URL, it creates a heavy load on both the CKAN and Postgres database servers. In order to alleviate this load, this extension generates a blob file uploads it to filestore, and then serves downloads directly from filestore.
 
 ## How this work 
@@ -11,7 +8,7 @@ It also works with s3filestorage.
 
 ## Installation
 
-To install ckanext-datastore-uploader:
+To install ckanext-datastore-dumper :
 
 1. Activate your CKAN virtual environment, for example:
 
@@ -19,12 +16,12 @@ To install ckanext-datastore-uploader:
 
 2. Clone the source and install it on the virtualenv
 
-        git clone https://github.com/sagargg/ckanext-datastore-uploader.git
-        cd ckanext-datastore-uploader
+        git clone https://github.com/sagargg/ckanext-datastore-dumper.git
+        cd ckanext-datastore-dumper 
         pip install -e .
 	    pip install -r requirements.txt
 
-3. Add `datastore-uploader` to the `ckan.plugins` setting in your CKAN
+3. Add `datastore_dumper` to the `ckan.plugins` setting in your CKAN
    config file (by default the config file is located at
     `/etc/ckan/default/ckan.ini`).
 
@@ -44,16 +41,16 @@ To install ckanext-datastore-uploader:
 
 If you are using [ckanext-noanonaccess](https://github.com/datopian/ckanext-noanonaccess) extension then allow this blueprint
 
-    ckanext.noanonaccess.allowed_blueprint = datastore_uploader.dump
+    ckanext.noanonaccess.allowed_blueprint = datastore_dumper.dump
 
 
 ## Developer installation
 
-To install ckanext-datastore-uploader for development, activate your CKAN virtualenv and
+To install ckanext-datastore-dumper for development, activate your CKAN virtualenv and
 do:
 
-    git clone https://github.com/sagargg/ckanext-datastore-uploader.git
-    cd ckanext-datastore-uploader
+    git clone https://github.com/sagargg/ckanext-datastore-dumper.git
+    cd ckanext-datastore-dumper
     python setup.py develop
     pip install -r dev-requirements.txt
 

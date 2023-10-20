@@ -1,10 +1,9 @@
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
-from ckanext.datastore_uploader.logic import action, auth
-import ckanext.datastore_uploader.views as views
+from ckanext.datastore_dumper.logic import action, auth
+import ckanext.datastore_dumper.views as views
 
-
-class DatastoreUploaderPlugin(plugins.SingletonPlugin):
+class DatastoreDumperPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.IActions)
@@ -14,7 +13,7 @@ class DatastoreUploaderPlugin(plugins.SingletonPlugin):
     def update_config(self, config_):
         toolkit.add_template_directory(config_, "templates")
         toolkit.add_public_directory(config_, "public")
-        toolkit.add_resource("assets", "datastore_uploader")
+        toolkit.add_resource("assets", "datastore_dumper")
 
     # IActions
     def get_actions(self):

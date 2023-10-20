@@ -1,5 +1,5 @@
 import ckan.plugins.toolkit as toolkit
-from ckanext.datastore_uploader.logic.tasks import datastore_upload
+from ckanext.datastore_dumper.logic.tasks import datastore_upload
 
 from ckan.lib.jobs import DEFAULT_QUEUE_NAME
 

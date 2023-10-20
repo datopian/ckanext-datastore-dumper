@@ -1,4 +1,4 @@
-ckan.module("datastore_uploader-module", function ($, _) {
+ckan.module("datastore_dumper-module", function ($, _) {
   "use strict";
   return {
     options: {

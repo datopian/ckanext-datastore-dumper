@@ -1,7 +1,7 @@
 import json
 import ckan.plugins.toolkit as tk
 import ckan.plugins as plugins
-from ckanext.datastore_uploader.logic.jobs import enqueue_datastore_upload
+from ckanext.datastore_dumper.logic.jobs import enqueue_datastore_upload
 
 log = __import__("logging").getLogger(__name__)
 
