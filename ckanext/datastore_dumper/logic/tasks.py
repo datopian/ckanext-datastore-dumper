@@ -34,7 +34,11 @@ def datastore_upload(resource_dict, user_dict):
     headers = {
         "Authorization": api_token,
     }
-    response = requests.get(url, headers=headers, stream=True, params={"bom": True})
+    response = requests.get(url, headers=headers, stream=True, params={
+        "bom": True,
+        "latest": True
+        })
+    
     file_storage = FileStorage(
         stream=BytesIO(response.content), filename="{}.csv".format(resource_dict["id"])
     )
